@@ -16,25 +16,25 @@ app.use((req, res, next) => {
  next();
 });
 
-app.put('/editEarnings/?id/', (req, res) => {
+app.put('/editEarnings/:id/', (req, res) => {
   db.updateData(req.query.id, req.body, (err,results) => {
     console.log(results);
   });
 })
 
-app.put('/editRatings/?id/', (req, res) => {
+app.put('/editRatings/:id/', (req, res) => {
   db.updateRatings(req.query.id, req.body, (err,results) => {
     console.log(results);
   });
 })
 
-app.post('newRatings/?id/', (req, res) => {
+app.post('newRatings/:id/', (req, res) => {
   db.addRatings(req.query.id, req.body, (err,results) => {
     console.log(results);
   });
 })
 
-app.post('newEarnings/?id/', (req, res) => {
+app.post('newEarnings/:id/', (req, res) => {
   db.addRatings(req.query.id, req.body, (err,results) => {
     console.log(results);
   });
