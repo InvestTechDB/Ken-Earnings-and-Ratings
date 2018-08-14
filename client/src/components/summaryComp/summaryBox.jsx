@@ -42,7 +42,6 @@ class SummaryBox extends Component {
       $(`#fade_${this.props.ind}`).css({"overflow" : "visible", "height" : "auto"});
 
       heightDiff = this.heightDiff(`#fade_${this.props.ind}`);
-      console.log(heightDiff)
       this.addHeight(`#summaryBox_${this.props.ind}`, heightDiff);
       this.addTop(`#summaryTail_${this.props.ind}`, heightDiff);
       if (this.props.ind === 0) {

@@ -19,8 +19,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // for now, send a request to get fake data from server
     let id = this.props.pId;
+    
     setTimeout(() => { 
       $.ajax({
         url: `http://localhost:3004/companies/${id}`,
