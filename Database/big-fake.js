@@ -20,7 +20,21 @@ const dataGenerator = () => {
     for(let j = 0; j < adjsTwoLength; j++){
       for (let k = 0; k < nounsLength; k++) {
         for(let l = 0; l < typeLength; l++){
-          writer.write({companyName:`${adjsOne[i]} ${adjsTwo[j]} ${nouns[k]} ${type[l]}`, best_summary: faker.lorem.paragraph(), sell_summary:faker.lorem.paragraph()})
+          let name = `${adjsOne[i]} ${adjsTwo[j]} ${nouns[k]} ${type[l]}`;
+          writer.write( {
+            companyName: name, 
+            best_summary: faker.lorem.sentence(), 
+            sell_summary:faker.lorem.sentence(), 
+            ratings: JSON.stringify({
+              'buy': Math.floor((Math.random() * 80)) + 20, 
+              'sell': Math.floor((Math.random() * 80)) + 20,
+              'hold': Math.floor((Math.random() * 80)) + 20
+            }),
+            earnings: JSON.stringify({
+              estimated: ['Q4 2016', faker.commerce.price(.10,5.00,2,"$"), 'Q1 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q2 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q3 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q4 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q1 2018', faker.commerce.price(.10,5.00,2,"$"), 'Q2 2018', faker.commerce.price(.10,5.00,2,"$")],
+              actual: ['Q4 2016', faker.commerce.price(.10,5.00,2,"$"), 'Q1 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q2 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q3 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q4 2017', faker.commerce.price(.10,5.00,2,"$"), 'Q1 2018', faker.commerce.price(.10,5.00,2,"$"), 'Q2 2018', faker.commerce.price(.10,5.00,2,"$")]
+            }) 
+          });
         }
       }
     }

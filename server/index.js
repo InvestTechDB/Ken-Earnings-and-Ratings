@@ -3,12 +3,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 //const db = require('../database/db');
 const faker = require('faker');
-const postgresDB = require('../cassdb/index.js')
+const postgresDB = require('../Database/index.js')
 
 let port = process.env.PORT || 3004;
 let app = express();
 
-// app.use('/:id', express.static(__dirname + '/../client/dist/'));
+app.use('/:id', express.static(__dirname + '/../client/dist/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
@@ -17,8 +17,8 @@ app.use((req, res, next) => {
  next();
 });
 
-app.get('/test', (req, res) => {
-  postgresDB.testTheLoad('Upbeat Strange Shayaun Nejad, PhD, MD, DDS, JD General Partnership', (err, results)=>{
+app.get('/companies/:company_id', (req, res) => {
+  postgresDB.getCompanyData(req.params.company_id, (err, results)=>{
     console.log(results);
     res.status(200).send(results)
   });

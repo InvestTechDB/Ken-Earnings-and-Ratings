@@ -24,4 +24,6 @@ coverage
 build/
 client/dist/
 
-databasePGRS/db/data.csv
+DatabaseCass/data.csv
+
+Database/data.csv

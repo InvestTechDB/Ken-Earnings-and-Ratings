@@ -9,7 +9,6 @@ class App extends React.Component {
     super(props);
     this.state = { 
       exampleDataLoaded: false,
-      companyId: null,
       companyName: '',
       companyEstimatedEarnings: [],
       companyActualEarnings: [],
@@ -21,42 +20,29 @@ class App extends React.Component {
 
   componentDidMount() {
     // for now, send a request to get fake data from server
-    let that = this;
-    // let id = location.pathname.split('/')[1];
     let id = this.props.pId;
     setTimeout(() => { 
       $.ajax({
-        url: `http://localhost:3004/createExample/${id}`,
+        url: `http://localhost:3004/companies/${id}`,
         type: 'GET',
         contentType: 'application/json',
         success: (data) => {
-          // once example data created, do another AJAX to get the data
-          $.ajax({
-            url: `http://localhost:3004/getExample/${id}`,
-            type: 'GET',
-            contentType: 'application/json',
-            success: (data) => {
-              console.log(data)
-              that.setState({
-                exampleDataLoaded : true,
-                companyId: JSON.parse(data.id),
-                companyName: data.name,
-                companyEstimatedEarnings: JSON.parse(data.esimated),
-                companyActualEarnings: JSON.parse(data.actual),
-                buySummary: data.bestsummary,
-                sellSummary: data.sellsummary,
-                ratings: data.raters
-              });
-            },
-            error: (error) => {
-              console.log('Failed to access the data base : ', error);
-            }
-          })
+          console.log(data);
+          let earnings = JSON.parse(data.earnings);
+          this.setState({
+            exampleDataLoaded : true,
+            companyName: data.name,
+            companyEstimatedEarnings: earnings.estimated,
+            companyActualEarnings: earnings.actual,
+            buySummary: data.best_summary,
+            sellSummary: data.sell_summary,
+            ratings: JSON.parse(data.ratings)
+          }, () => {console.log(this.state)});
         },
         error: () => {
-
+          console.log('Failed to access the data base : ', error);
         }
-    }); }, 0);
+    })}, 0);
   }
 
   render () {

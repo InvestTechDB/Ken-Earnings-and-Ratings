@@ -15,13 +15,9 @@ class Summary extends Component {
   }
 
   componentDidUpdate () {
-    let buyCount = 0;
-    this.props.ratings.forEach((element) => {
-      if (element === 'Buy') {
-        buyCount++
-      };
-    });
-    let raterCount = this.props.ratings.length;
+    let ratings = this.props.ratings
+    let buyCount = ratings.buy;
+    let raterCount = ratings.buy + ratings.sell + ratings.hold;
     if (!this.state.trigger) {
       this.setState({ 
         buyPerc : Math.round((buyCount / raterCount) * 100),
