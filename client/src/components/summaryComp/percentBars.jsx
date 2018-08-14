@@ -13,28 +13,13 @@ class PercentBars extends Component {
   }
 
   componentDidUpdate () {
-    let buyCount = this.props.ratings.reduce((accum, element) => {
-      if (element === 'Buy') {
-        return accum + 1;
-      }
-      return accum;
-    }, 0);
+    let buyCount = this.props.ratings.buy;
 
-    let holdCount = this.props.ratings.reduce((accum, element) => {
-      if (element === 'Hold') {
-        return accum + 1;
-      }
-      return accum;
-    }, 0);
+    let holdCount = this.props.ratings.hold;
 
-    let sellCount = this.props.ratings.reduce((accum, element) => {
-      if (element === 'Sell') {
-        return accum + 1;
-      }
-      return accum;
-    }, 0);
+    let sellCount = this.props.ratings.sell;
 
-    let length = this.props.ratings.length;
+    let length = this.props.ratings.buy + this.props.ratings.sell + this.props.ratings.hold;
 
     if (this.state.trigger === false) {
       this.setState({ counts: [buyCount, holdCount, sellCount], total: length, trigger: true });
