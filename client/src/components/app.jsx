@@ -27,7 +27,6 @@ class App extends React.Component {
         type: 'GET',
         contentType: 'application/json',
         success: (data) => {
-          console.log(data);
           let earnings = JSON.parse(data.earnings);
           this.setState({
             exampleDataLoaded : true,
@@ -37,10 +36,10 @@ class App extends React.Component {
             buySummary: data.best_summary,
             sellSummary: data.sell_summary,
             ratings: JSON.parse(data.ratings)
-          }, () => {console.log(this.state)});
+          });
         },
         error: () => {
-          console.log('Failed to access the data base : ', error);
+          console.log('Failed to access the database: ', error);
         }
     })}, 0);
   }
